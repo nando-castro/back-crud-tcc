@@ -15,9 +15,11 @@ app.get("/users", async (req, res) => {
 
 app.post("/user", async (req, res) => {
   const data = req.body;
+  console.log(data)
   await prisma.user.create({
     data: {
       name: data.name,
+      email: data.email,
     },
   });
   return res.sendStatus(201);
