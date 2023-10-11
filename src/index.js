@@ -3,8 +3,8 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 const app = express();
 const port = process.env.PORT || 5000;
-const bodyParser = require('body-parser');
-const cors = require('cors');
+const bodyParser = require("body-parser");
+const cors = require("cors");
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -17,7 +17,7 @@ app.get("/users", async (req, res) => {
 
 app.post("/user", async (req, res) => {
   const data = req.body;
-  console.log(data)
+  console.log(data);
   await prisma.user.create({
     data: {
       name: data.name,
@@ -26,7 +26,6 @@ app.post("/user", async (req, res) => {
   });
   return res.sendStatus(201);
 });
-
 
 app.delete("/user/:id", async (req, res) => {
   const { id } = req.params;
@@ -47,6 +46,7 @@ app.put("/user/:id", async (req, res) => {
     },
     data: {
       name: data.name,
+      email: data.email,
     },
   });
   return res.sendStatus(200);
@@ -69,12 +69,14 @@ app.get("/user/:id", async (req, res) => {
     where: {
       id: Number(id),
     },
-  });  
+  });
   if (user.length > 0) return res.status(200).send(user);
   return res.send("No user found");
 });
 
 // Inicie o servidor na porta especificada
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`Servidor rodando na porta ${port}`);
 });
+
+module.exports = { app, server };

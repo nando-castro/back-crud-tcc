@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run prisma:deploy && node src/index.js",
+    "test": "jest --detectOpenHandles",
     "dev:migrate": "npx prisma migrate dev",
     "prisma:deploy": "npx prisma migrate deploy"
   },
@@ -19,6 +20,8 @@
     "prisma": "^5.3.1"
   },
   "devDependencies": {
-    "@prisma/client": "^5.3.1"
+    "@prisma/client": "^5.3.1",
+    "jest": "^29.7.0",
+    "supertest": "^6.3.3"
   }
 }
