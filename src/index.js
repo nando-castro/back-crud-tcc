@@ -12,15 +12,12 @@ app.use(cors());
 app.get("/users", async (req, res) => {
   const users = await prisma.user.findMany();
   if (users.length > 0) return res.status(200).send(users);
-<<<<<<< HEAD
   return res.status(404).send("No user found");
-=======
-  return res.status(404).send("No users found");
->>>>>>> 9c3d37f8fb846f28e72e459b9a51ddc6b3eb7945
 });
 
 app.post("/user", async (req, res) => {
   const data = req.body;
+  console.log(data);
   await prisma.user.create({
     data: {
       name: data.name,
@@ -63,11 +60,7 @@ app.get("/users/:name", async (req, res) => {
     },
   });
   if (user.length > 0) return res.status(200).send(user);
-<<<<<<< HEAD
-  return res.status(404).send("No user found");
-=======
-  return res.status(404).send("No users found");
->>>>>>> 9c3d37f8fb846f28e72e459b9a51ddc6b3eb7945
+  return res.send("No user found");
 });
 
 app.get("/user/:id", async (req, res) => {
@@ -78,7 +71,7 @@ app.get("/user/:id", async (req, res) => {
     },
   });
   if (user.length > 0) return res.status(200).send(user);
-  return res.status(404).send("No user found");
+  return res.send("No user found");
 });
 
 // Inicie o servidor na porta especificada
